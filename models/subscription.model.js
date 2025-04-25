@@ -29,7 +29,7 @@ const subscriptionSchema = new mongoose.Schema({
     },
     category: {
         type: String,
-        required: [true, "Subscription category is required"],
+        required: [, "Subscription category is required"],
         trim: true,
         enum: ["basic", "premium", "enterprise"],
     },
@@ -37,7 +37,7 @@ const subscriptionSchema = new mongoose.Schema({
         type: String,
         required: [true, "Payment method is required"],
         trim: true,
-        enum: ["credit_card", "paypal", "UPI"],
+        enum: ["Credit Card", "paypal", "UPI"],
     },
     status: {
         type: String,
@@ -50,7 +50,7 @@ const subscriptionSchema = new mongoose.Schema({
         type: Date,
         required: [true, "Subscription start date is required"],
         validate: {
-            validator:(value) => value <= new Date(),
+            validator: (value) => value <= new Date(),
             message: "Start date cannot be in the future",
         }
     },
@@ -58,9 +58,9 @@ const subscriptionSchema = new mongoose.Schema({
         type: Date,
         validate: {
             validator: function (value) {
-                 value > this.startDate;
+                return value > this.startDate;
             },
-            message: "Start date cannot be in the future",
+            message: "Renewal date must be after start date",
         }
     },
     user: {
@@ -72,18 +72,17 @@ const subscriptionSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 subscriptionSchema.pre('save', function (next) {
-    if(!this.renrewalDate){
+    if (!this.renewalDate) {
         const renewalPeriod = {
-            daily: 1,
-            weekly:7,
-            monthly:28,
-            yearly:365
+            monthly: 30,  // Average days in a month
+            yearly: 365   // Days in a year
         };
-        this.renewalDate= new Date(this.startDate);
+        
+        this.renewalDate = new Date(this.startDate);
         this.renewalDate.setDate(this.renewalDate.getDate() + renewalPeriod[this.frequency]);
     }
 
-    if(this.renewalDate < this.Date){
+    if (this.renewalDate < this.startDate) {
         this.status = "inactive";
     }
 

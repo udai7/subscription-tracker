@@ -1,4 +1,3 @@
-import express from "express";
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
@@ -25,7 +24,7 @@ const userSchema = new mongoose.Schema({
         trim: true,
     } 
 
-},{timestamp:true});
+},{timestamps:true});
 
 const User = mongoose.model("User", userSchema);
 

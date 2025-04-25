@@ -59,3 +59,19 @@ typings/
 .env.*.local
 # next.js build output
 .next
+
+# {
+#   "success": true,
+#   "message": "User created successfully!",
+#   "data": {
+#     "user": {
+#       "name": "Usesr Name",
+#       "email": "usesr@example.com",
+#       "_id": "6807c6233be501747483d4e7",
+#       "createdAt": "2025-04-22T16:38:59.090Z",
+#       "updatedAt": "2025-04-22T16:38:59.090Z",
+#       "__v": 0
+#     },
+#     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODA3YzYyMzNiZTUwMTc0NzQ4M2Q0ZTciLCJpYXQiOjE3NDUzMzk5MzksImV4cCI6MTc0NTQyNjMzOX0.54H2qcgQnWaiGIRlry02ATgnpu-I7poD8O57_qH8B2c"
+#   }
+# }
